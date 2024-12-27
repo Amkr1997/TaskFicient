@@ -182,7 +182,7 @@ const Report = () => {
             </div>
           </div>
 
-          <div className="card w-75 mx-auto my-4">
+          <div className="card mx-auto my-4">
             <div className="card-head py-3">
               <h2 className="m-0 text-center text-primary-emphasis fw-normal">
                 Completed Task Details
