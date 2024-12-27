@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../css/addTaskBtn.module.css";
-import { useLoginMutation } from "../features/apiSLice";
+import { useLoginMutation } from "../features/apiSlice";
 import { useDispatch } from "react-redux";
 import { loginReducer } from "../features/authSlice";
 import { toast } from "react-toastify";

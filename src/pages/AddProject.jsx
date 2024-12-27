@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import {
   useAddProjectsMutation,
   useUpdateProjectMutation,
-} from "../features/apiSLice";
+} from "../features/apiSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const AddProject = () => {

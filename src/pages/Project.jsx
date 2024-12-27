@@ -3,7 +3,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   useDeleteProjectMutation,
   useGetProjectsQuery,
-} from "../features/apiSLice";
+} from "../features/apiSlice";
 import { BsFillTrashFill } from "react-icons/bs";
 import { BsPencilSquare } from "react-icons/bs";
 import { toast } from "react-toastify";

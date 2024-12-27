@@ -4,7 +4,7 @@ import {
   useDeleteTaskMutation,
   useGetTaskQuery,
   useLazyGetTaskFilteredQuery,
-} from "../features/apiSLice";
+} from "../features/apiSlice";
 import { toast } from "react-toastify";
 import Filters from "../components/Filters";
 import { useState } from "react";

@@ -4,7 +4,7 @@ import {
   useGetProjectsQuery,
   useGetTagsQuery,
   useGetTeamsQuery,
-} from "../features/apiSLice";
+} from "../features/apiSlice";
 
 const Filters = ({
   fetchTasks,

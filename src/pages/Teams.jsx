@@ -1,6 +1,6 @@
 import styles from "../css/workspace.module.css";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useDeleteTeamMutation, useGetTeamsQuery } from "../features/apiSLice";
+import { useDeleteTeamMutation, useGetTeamsQuery } from "../features/apiSlice";
 import { BsFillTrashFill } from "react-icons/bs";
 import { BsPencilSquare } from "react-icons/bs";
 import { toast } from "react-toastify";

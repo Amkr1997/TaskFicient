@@ -1,6 +1,6 @@
 import moment from "moment";
 import styles from "../css/workspace.module.css";
-import { useGetTaskQuery } from "../features/apiSLice";
+import { useGetTaskQuery } from "../features/apiSlice";
 import { useEffect, useState } from "react";
 import { defaults, Chart as ChartJS } from "chart.js/auto";
 import { Bar } from "react-chartjs-2";

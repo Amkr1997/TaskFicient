@@ -7,7 +7,7 @@ import {
   useGetTagsQuery,
   useGetTeamsQuery,
   useUpdateTaskMutation,
-} from "../features/apiSLice";
+} from "../features/apiSlice";
 import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 

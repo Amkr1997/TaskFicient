@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import {
   useAddTeamMutation,
   useUpdateTeamMutation,
-} from "../features/apiSLice";
+} from "../features/apiSlice";
 import { useLocation } from "react-router-dom";
 
 const AddTeam = () => {

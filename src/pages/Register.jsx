@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "../css/addTaskBtn.module.css";
 import { Link } from "react-router-dom";
-import { useSignupMutation } from "../features/apiSLice";
+import { useSignupMutation } from "../features/apiSlice";
 
 const Register = () => {
   const [formData, setFormData] = useState({

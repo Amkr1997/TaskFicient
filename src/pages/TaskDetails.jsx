@@ -1,6 +1,6 @@
 import styles from "../css/taskDetails.module.css";
 import { useParams } from "react-router-dom";
-import { useGetTaskQuery, useUpdateTaskMutation } from "../features/apiSLice";
+import { useGetTaskQuery, useUpdateTaskMutation } from "../features/apiSlice";
 
 const TaskDetails = () => {
   const { data: tasks } = useGetTaskQuery();

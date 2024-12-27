@@ -5,7 +5,7 @@ import stylesTwo from "../css/profile.module.css";
 import {
   useGetSingleUserQuery,
   usePrivateRouteQuery,
-} from "../features/apiSLice";
+} from "../features/apiSlice";
 import styles from "../css/workspace.module.css";
 
 const Profile = () => {
