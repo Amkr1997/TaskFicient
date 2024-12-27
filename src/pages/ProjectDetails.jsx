@@ -8,6 +8,7 @@ import {
 import { toast } from "react-toastify";
 import Filters from "../components/Filters";
 import { useState } from "react";
+import Loader from "../components/Loader";
 
 const ProjectDetails = () => {
   const [newProject, setNewProject] = useState("");
@@ -61,7 +62,9 @@ const ProjectDetails = () => {
             <h3 className="py-1 ps-4">Project: {state}</h3>
             <h4 className="mb-0">Task list:</h4>
 
-            {!taskIsLoading && (
+            {taskIsLoading ? (
+              <Loader />
+            ) : (
               <div className="table-responsive-md tasks">
                 <table className="table table-primary">
                   <thead>

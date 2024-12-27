@@ -121,7 +121,7 @@ const Filters = ({
               <div className="d-flex align-items-center justify-content-start gap-1 flex-wrap">
                 <h6 className="pe-2 m-0 d-inline">Filter By Owners: </h6>
                 {userHasError && <h1>{userError}</h1>}
-                {!userIsLoading &&
+                {!userIsLoading ? (
                   users?.allUsers?.map((user) => {
                     return (
                       <label key={user._id}>
@@ -136,7 +136,10 @@ const Filters = ({
                         {user.name}
                       </label>
                     );
-                  })}
+                  })
+                ) : (
+                  <p className="text-uppercase fw-bold fs-6 m-0">loading...</p>
+                )}
               </div>
             </div>
             {location.pathname.includes("/projectDetails") && (
@@ -144,7 +147,7 @@ const Filters = ({
                 <div className="d-flex align-items-center justify-content-start gap-1 flex-wrap">
                   <h6 className="pe-2 m-0 d-inline">Filter By Team: </h6>
                   {teamHasError && <h1>{teamError}</h1>}
-                  {!teamIsLoading &&
+                  {!teamIsLoading ? (
                     teams?.allTeams?.map((team) => {
                       return (
                         <label key={team._id}>
@@ -159,7 +162,12 @@ const Filters = ({
                           {team.name}
                         </label>
                       );
-                    })}
+                    })
+                  ) : (
+                    <p className="text-uppercase fw-bold fs-6 m-0">
+                      loading...
+                    </p>
+                  )}
                 </div>
               </div>
             )}
@@ -168,7 +176,7 @@ const Filters = ({
                 <div className="d-flex align-items-center justify-content-start gap-1 flex-wrap">
                   <h6 className="pe-2 m-0 d-inline">Filter By Project: </h6>
                   {projectHasError && <h1>{projectError}</h1>}
-                  {!projectIsLoading &&
+                  {!projectIsLoading ? (
                     projects?.allProjects?.map((project) => {
                       return (
                         <label key={project._id}>
@@ -183,7 +191,12 @@ const Filters = ({
                           {project.name}
                         </label>
                       );
-                    })}
+                    })
+                  ) : (
+                    <p className="text-uppercase fw-bold fs-6 m-0">
+                      loading...
+                    </p>
+                  )}
                 </div>
               </div>
             )}
@@ -191,7 +204,7 @@ const Filters = ({
               <div className="d-flex align-items-center justify-content-start gap-1 flex-wrap">
                 <h6 className="pe-2 m-0 d-inline">Filter By Tags: </h6>
                 {tagHasError && <h1>{tagError}</h1>}
-                {!tagIsLoading &&
+                {!tagIsLoading ? (
                   tags?.allTags?.map((tag) => {
                     return (
                       <label key={tag._id}>
@@ -206,7 +219,10 @@ const Filters = ({
                         {tag.name}
                       </label>
                     );
-                  })}
+                  })
+                ) : (
+                  <p className="text-uppercase fw-bold fs-6 m-0">loading...</p>
+                )}
               </div>
             </div>
           </div>

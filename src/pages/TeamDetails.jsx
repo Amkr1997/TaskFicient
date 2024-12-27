@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Filters from "../components/Filters";
 import { useState } from "react";
+import Loader from "../components/Loader";
 
 const TeamDetails = () => {
   const [newTeam, setNewTeam] = useState("");
