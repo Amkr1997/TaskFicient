@@ -1,0 +1,52 @@
+@media (min-width: 66.813rem) {
+  .functionality {
+    flex-direction: row !important;
+  }
+
+  .utilityContainer {
+    order: 2 !important;
+  }
+}
+
+.createTaskBtn,
+.disabledBtn {
+  width: 3rem !important;
+}
+
+.functionality {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.taskBtnContainer {
+  order: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.createTaskBtn,
+.disabledBtn {
+  background-color: #74c0fc;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.25rem 0;
+  text-decoration: none;
+  text-align: center;
+  color: #212529;
+  width: 100%;
+}
+
+.createTaskBtn:hover {
+  background-color: #339af0;
+  color: #edf2ff;
+  transition: all 0.2s;
+}
+
+.disabledBtn {
+  background-color: #adb5bd;
+}

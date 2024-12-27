@@ -1,0 +1,22 @@
+@media (min-width: 36rem) {
+  .navbarResponsive {
+    display: none !important;
+  }
+
+  .navbar {
+    height: 10vh !important;
+    display: block !important;
+  }
+}
+
+.navbar {
+  display: none;
+}
+
+.navHeading {
+  color: #0b7285;
+}
+
+.navbarResponsive {
+  display: block;
+}

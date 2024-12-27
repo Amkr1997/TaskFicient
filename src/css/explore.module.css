@@ -1,0 +1,40 @@
+@media (min-width: 36rem) {
+  .exploreSec {
+    display: block !important;
+    background-color: #0b7285;
+    height: 90vh;
+    border-top-right-radius: 0.5rem;
+  }
+}
+
+.exploreSec {
+  display: none;
+}
+
+.topHeading {
+  color: #212529;
+}
+
+.exploreList {
+  list-style: none;
+}
+
+.exploreItem {
+  cursor: pointer;
+  color: #e7f5ff;
+}
+
+.itemSelected {
+  text-decoration: none;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.125rem;
+  background-color: #f8f9fa;
+  color: #212529;
+  display: block;
+}
+
+.exploreHeading {
+  text-decoration: none;
+  color: #212529;
+  display: block;
+}

@@ -1,0 +1,145 @@
+@media (min-width: 64.625rem) {
+  .quickAccess {
+    flex-direction: row !important;
+  }
+}
+
+@media (min-width: 49.875rem) {
+  .addTaskContainer {
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 28.813rem) {
+  .addTask {
+    font-size: 1.25rem !important;
+  }
+
+  .quickFilter {
+    font-size: 1.25rem !important;
+  }
+
+  .addTaskBtn {
+    font-size: 1.25rem !important;
+  }
+}
+
+.workspaceSec {
+  height: 90vh;
+  border-top-left-radius: 0.5rem;
+  position: relative;
+  overflow: auto;
+}
+
+.topHeading {
+  color: #212529;
+}
+
+.workspaceProject {
+  text-decoration: none;
+  height: 5rem;
+  cursor: pointer;
+}
+
+.cardComponent {
+  background-color: #e9ecef;
+}
+
+.projectHeading {
+  color: #1864ab;
+}
+
+.deleteBtn {
+  cursor: pointer;
+}
+
+.editBtn {
+  cursor: pointer;
+}
+
+.table {
+  max-width: 100%;
+}
+
+.taskDetails {
+  text-decoration: none;
+  color: #212529;
+}
+
+.addTaskContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tableContainer {
+  height: 10rem;
+  overflow-y: auto;
+}
+
+.quickAccess {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.createTaskBtn {
+  background-color: #74c0fc;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.25rem 0;
+  text-decoration: none;
+  text-align: center;
+  color: #212529;
+  width: 10rem !important;
+}
+
+.createTaskBtn:hover {
+  background-color: #339af0;
+  color: #edf2ff;
+  transition: all 0.2s;
+}
+
+.addTask {
+  font-size: 1rem;
+}
+
+.quickFilter {
+  font-size: 1rem;
+}
+
+.inProgress {
+  background-color: #ffd43b;
+  border: none;
+  padding: 0.125rem 1rem;
+  border-radius: 0.75rem;
+  color: #212529;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.completed {
+  background-color: #8ce99a;
+  border: none;
+  padding: 0.125rem 1rem;
+  border-radius: 0.75rem;
+  color: #212529;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.inProgress:hover {
+  background-color: #f59f00;
+  transition: all 0.2s;
+}
+
+.completed:hover {
+  background-color: #37b24d;
+  transition: all 0.2s;
+}
