@@ -30,7 +30,6 @@ const apiSlice = createApi({
       // User Routes
       signup: builder.mutation({
         query: (dataToPost) => {
-          console.log(dataToPost);
           return {
             url: "/register",
             method: "POST",
