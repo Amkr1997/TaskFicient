@@ -8,8 +8,8 @@ const Navbar = () => {
         <h1 className="text-center fw-bold m-0 pt-1 fs-2">
           DashBoard{" "}
           <span className="fs-5 fw-medium fst-italic">
-            <span className="fs-6">by</span> Work
-            <span className={`${styles.navHeading}`}>Asana</span>
+            <span className="fs-6">by</span> Task
+            <span className={`${styles.navHeading}`}>Ficient</span>
           </span>
         </h1>
       </header>
@@ -22,8 +22,8 @@ const Navbar = () => {
             <h1 className="text-center fw-bold m-0 pt-1 fs-2">
               DashBoard{" "}
               <span className="fs-5 fw-medium fst-italic">
-                <span className="fs-6">by</span> Work
-                <span className={`${styles.navHeading}`}>Asana</span>
+                <span className="fs-6">by</span> Task
+                <span className={`${styles.navHeading}`}>Ficient</span>
               </span>
             </h1>
           </Link>
