@@ -1,9 +1,9 @@
+import moment from "moment";
 import styles from "../css/workspace.module.css";
 import { useGetTaskQuery } from "../features/apiSlice";
 import { useEffect, useState } from "react";
 import { defaults, Chart as ChartJS } from "chart.js/auto";
-import { Doughnut } from "react-chartjs-2";
-import Spinner from "../components/Spinner";
+import { Bar } from "react-chartjs-2";
 
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
@@ -14,36 +14,89 @@ defaults.plugins.title.font.size = 18;
 defaults.plugins.title.color = "#212529";
 
 const Report = () => {
-  const [allCompletedTasks, setAllCompletedTasks] = useState([]);
+  const [lastWeekTasks, setLastWeekTasks] = useState([]);
+  const [pendingTasks, setPendingTasks] = useState([]);
+  const [pendingTasksCount, setPendingTasksCount] = useState(0);
+  const [completedTasks, setCompletedTasks] = useState([]);
   const [taskOwners, setTasksOwners] = useState();
-  const [allTasks, setAllTasks] = useState([]);
-  const taskNames = ["Completed Tasks", "Pending Tasks"];
+  const [taskProjects, setTaskProjects] = useState();
+  const [taskTeam, setTaskTeam] = useState();
+
   const { data: tasks, isLoading } = useGetTaskQuery();
 
-  const handleChartTask = () => {
-    const completedTasks = tasks?.foundData?.filter(
+  const handleCompleteTask = () => {
+    const weekCounts = Array(7).fill(0);
+
+    const newFoundTasks = tasks?.foundData?.filter(
       (task) => task.status === "Completed"
     );
+
+    newFoundTasks?.forEach((task) => {
+      const createdAt = moment(task.createdAt);
+      const todayDate = moment();
+
+      if (
+        createdAt.isSameOrAfter(todayDate.clone().subtract(6, "days"), "day")
+      ) {
+        const dayOfWeek = createdAt.isoWeekday() - 1;
+        weekCounts[dayOfWeek]++;
+      }
+    });
+
+    setLastWeekTasks(weekCounts);
+  };
+
+  const handlePendingTasks = () => {
+    if (!tasks?.foundData) return;
+
+    const weeklyCount = Array(7).fill(0);
 
     const pendingTasks = tasks?.foundData?.filter(
       (task) => task.status !== "Completed"
     );
 
-    setAllTasks([completedTasks?.length, pendingTasks?.length]);
+    const totalPendingDays = pendingTasks?.reduce((acc, curr) => {
+      const todayDate = moment();
+      const createdAt = moment(curr.createdAt);
+      const pendingDays = curr.timeToComplete;
+
+      if (
+        todayDate.isSameOrBefore(
+          createdAt.clone().add(pendingDays, "days"),
+          "day"
+        )
+      ) {
+        const dayOfWeek = createdAt.isoWeekday() - 1;
+        weeklyCount[dayOfWeek]++;
+      }
+
+      const totalPendingDays = (acc += curr.timeToComplete);
+      return totalPendingDays;
+    }, 0);
+
+    setPendingTasks(weeklyCount);
+    setPendingTasksCount(totalPendingDays);
+    //console.log(pendingTasksCount);
   };
 
   const handleClosedTask = () => {
     const newTasks = tasks?.foundData?.filter(
       (task) => task.status === "Completed"
     );
-    const owners = newTasks?.flatMap((task) => task.owners);
 
-    setAllCompletedTasks(newTasks);
+    const owners = newTasks?.flatMap((task) => task.owners);
+    const projects = newTasks?.map((task) => task.project);
+    const team = newTasks?.map((task) => task.team);
+
+    setCompletedTasks(newTasks);
     setTasksOwners(owners);
+    setTaskProjects(projects);
+    setTaskTeam(team);
   };
 
   useEffect(() => {
-    handleChartTask();
+    handleCompleteTask();
+    handlePendingTasks();
     handleClosedTask();
   }, [tasks]);
 
@@ -57,68 +110,75 @@ const Report = () => {
         </h2>
 
         <div className="row my-3">
-          <div className="col-12 col-lg-6 mb-4" style={{ height: "50vh" }}>
+          <div className="col-12 col-lg-6 mb-4" style={{ height: "40vh" }}>
             <div className="card h-100">
-              <div className="card-body">
-                {!isLoading ? (
-                  <Doughnut
+              <div className="card-body p-2 w-100">
+                {!isLoading && (
+                  <Bar
                     data={{
-                      labels: taskNames?.map((name) => name),
+                      labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
                       datasets: [
                         {
-                          label: "Tasks",
-                          data: allTasks?.map((data) => data),
+                          label: "Completed Tasks",
+                          data: lastWeekTasks?.map((taskCount) => taskCount),
                           borderWidth: 1,
-                          backgroundColor: ["#3bc9db", "#1098ad"],
-                          borderColor: ["#3bc9db", "#1098ad"],
+                          backgroundColor: ["#4dabf7", "#74c0fc", "#a5d8ff"],
+                          barThickness: 28,
+                          borderRadius: 3,
                         },
                       ],
                     }}
                     options={{
                       plugins: {
-                        title: {
-                          text: "Pending and Completed Tasks shown",
+                        title: { text: "Tasks completed in the past week" },
+                      },
+                      scales: {
+                        y: {
+                          ticks: { beginAtZero: false, stepSize: 1 },
+                          min: 0,
                         },
                       },
                     }}
                   />
-                ) : (
-                  <Spinner />
                 )}
               </div>
             </div>
           </div>
 
-          <div className="col-12 col-lg-6 mb-4" style={{ height: "50vh" }}>
+          <div
+            className="col-12 col-lg-6 d-flex flex-column"
+            style={{ height: "40vh" }}
+          >
             <div className="card h-100">
-              {!isLoading ? (
-                <div className="card-body d-flex flex-column align-items-center justify-content-center">
-                  <div className="text-center">
-                    <h2 className="fs-2 m-0">Total Tasks Completed</h2>
-                    <span className="fs-1 fw-bold" style={{ color: "#1098ad" }}>
+              <div className="card-body p-2">
+                <Bar
+                  data={{
+                    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                    datasets: [
                       {
-                        tasks?.foundData?.filter(
-                          (task) => task.status === "Completed"
-                        ).length
-                      }
-                    </span>
-                  </div>
-                  <hr />
-
-                  <div className="text-center">
-                    <h2 className="fs-2 m-0">Total Tasks Pending</h2>
-                    <span className="fs-1 fw-bold" style={{ color: "#1098ad" }}>
-                      {
-                        tasks?.foundData?.filter(
-                          (task) => task.status !== "Completed"
-                        ).length
-                      }
-                    </span>
-                  </div>
-                </div>
-              ) : (
-                <Spinner />
-              )}
+                        label: "Pending Tasks",
+                        data: pendingTasks?.map((task) => task),
+                        borderWidth: 1,
+                        backgroundColor: ["#c92a2a", "#f03e3e", "#ff8787"],
+                        barThickness: 28,
+                        borderRadius: 3,
+                      },
+                    ],
+                  }}
+                  options={{
+                    plugins: {
+                      title: { text: "Pending Tasks of the Week" },
+                    },
+                    scales: { y: { min: 0, ticks: { stepSize: 1 } } },
+                  }}
+                />
+              </div>
+            </div>
+            <div className="card p-2">
+              <h2 className="fs-5 d-flex align-items-center justify-content-start gap-4 text-capitalize">
+                <span>Total days pending:</span>
+                <span>{pendingTasksCount} days</span>
+              </h2>
             </div>
           </div>
 
@@ -140,7 +200,7 @@ const Report = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {allCompletedTasks?.map((task, index) => {
+                  {completedTasks?.map((task, index) => {
                     return (
                       <tr key={task._id}>
                         <th scope="row">{index + 1}</th>
@@ -152,8 +212,7 @@ const Report = () => {
                                 return owner._id === ownerOne._id;
                               });
                             })
-                            .map((owners) => owners?.name)
-                            .join(", ")}
+                            .map((owners) => owners?.name)}
                         </td>
                       </tr>
                     );
@@ -173,7 +232,7 @@ const Report = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {allCompletedTasks?.map((task, index) => {
+                  {completedTasks?.map((task, index) => {
                     return (
                       <tr key={task._id}>
                         <th scope="row">{index + 1}</th>
@@ -197,7 +256,7 @@ const Report = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {allCompletedTasks?.map((task, index) => {
+                  {completedTasks?.map((task, index) => {
                     return (
                       <tr key={task._id}>
                         <th scope="row">{index + 1}</th>
