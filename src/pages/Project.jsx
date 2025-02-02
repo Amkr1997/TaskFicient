@@ -7,6 +7,7 @@ import {
 import { BsFillTrashFill } from "react-icons/bs";
 import { BsPencilSquare } from "react-icons/bs";
 import { toast } from "react-toastify";
+import Spinner from "../components/Spinner";
 
 const Project = () => {
   const {
@@ -54,7 +55,7 @@ const Project = () => {
         {!location.pathname.includes("projectDetails") ? (
           <div className="row">
             {projectHasError && <h1>{projectError.error}</h1>}
-            {!projectIsLoading &&
+            {!projectIsLoading ? (
               projects?.allProjects?.map((project, index) => {
                 return (
                   <div
@@ -101,7 +102,10 @@ const Project = () => {
                     </div>
                   </div>
                 );
-              })}
+              })
+            ) : (
+              <Spinner />
+            )}
           </div>
         ) : (
           <Outlet />

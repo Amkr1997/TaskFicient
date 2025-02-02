@@ -4,6 +4,7 @@ import { useDeleteTeamMutation, useGetTeamsQuery } from "../features/apiSlice";
 import { BsFillTrashFill } from "react-icons/bs";
 import { BsPencilSquare } from "react-icons/bs";
 import { toast } from "react-toastify";
+import Spinner from "../components/Spinner";
 
 const Teams = () => {
   const {
@@ -51,7 +52,7 @@ const Teams = () => {
             {!location.pathname.includes("teamDetails") ? (
               <div className="row">
                 {teamHasError && <h1>{teamError}</h1>}
-                {!teamIsLoading &&
+                {!teamIsLoading ? (
                   teams?.allTeams?.map((team, index) => {
                     return (
                       <div
@@ -98,7 +99,10 @@ const Teams = () => {
                         </div>
                       </div>
                     );
-                  })}
+                  })
+                ) : (
+                  <Spinner />
+                )}
               </div>
             ) : (
               <Outlet />
